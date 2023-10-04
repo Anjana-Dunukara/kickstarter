@@ -42,4 +42,73 @@ describe("Campaign", () => {
     assert.ok(factory.options.address);
     assert.ok(campaign.options.address);
   });
+
+  it("marks the caller as the mangaer", async () => {
+    const manger = await campaign.methods.manager().call();
+    assert.equal(accounts[0], manger);
+  });
+
+  it("allows people contribute money and and marks them as approvers", async () => {
+    await campaign.methods.contribute().send({
+      value: "200",
+      from: accounts[1],
+    });
+
+    const isContributor = await campaign.methods.approvers(accounts[1]).call();
+    assert(isContributor);
+  });
+
+  it("requires minimum contribution", async () => {
+    try {
+      await campaign.methods.contribute().send({
+        value: "5",
+        from: accounts[1],
+      });
+      assert(false);
+    } catch (error) {
+      assert(error);
+    }
+  });
+
+  it("allows manager to make payment requests", async () => {
+    await campaign.methods
+      .createRequest("Buy arduino boards", "100", accounts[1])
+      .send({
+        from: accounts[0],
+        gas: "1000000",
+      });
+
+    const request = await campaign.methods.requests(0).call();
+
+    assert.equal("Buy arduino boards", request.description);
+  });
+
+  it("process requests", async () => {
+    await campaign.methods.contribute().send({
+      value: web3.utils.toWei("10", "ether"),
+      from: accounts[0],
+    });
+
+    await campaign.methods
+      .createRequest("A", web3.utils.toWei("5", "ether"), accounts[1])
+      .send({
+        from: accounts[0],
+        gas: "1000000",
+      });
+
+    await campaign.methods.approveRequest(0).send({
+      from: accounts[0],
+      gas: "1000000",
+    });
+
+    await campaign.methods.finalizeRequest(0).send({
+      from: accounts[0],
+      gas: "1000000",
+    });
+
+    let balance = await web3.eth.getBalance(accounts[1]);
+    balance = web3.utils.fromWei(balance, "ether");
+    balance = parseFloat(balance);
+    assert(balance > 104);
+  });
 });

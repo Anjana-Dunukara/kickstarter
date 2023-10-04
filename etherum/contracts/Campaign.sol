@@ -31,7 +31,7 @@ contract Campaign{
     
     address public manager;
     uint public minimumContribution;
-    mapping(address => bool) approvers;
+    mapping(address => bool) public approvers;
     uint approversCount;
 
     modifier restricted(){
@@ -51,7 +51,7 @@ contract Campaign{
     }
 
     uint numRequest;
-    mapping(uint => Request) requests;
+    mapping(uint => Request) public requests;
 
     function createRequest(string memory description, uint value, address payable recipient) public restricted {
         Request storage r = requests[numRequest++];
