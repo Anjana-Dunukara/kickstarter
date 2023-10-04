@@ -29,5 +29,6 @@ fs.ensureDirSync(buildPath);
 
 for (let contractName in compiled.contracts["Campaign.sol"]) {
   const contract = compiled.contracts["Campaign.sol"][contractName];
+  console.log(contract);
   fs.outputJSONSync(path.resolve(buildPath, contractName + ".json"), contract);
 }
