@@ -1,4 +1,5 @@
 import web3 from "./web3";
+
 const CampaignFactory = require("./build/CampaignFactory.json");
 
 const factoryABI = CampaignFactory.abi;
