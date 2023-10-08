@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import factory from "../etherum/factory";
 
 class CampaignIndex extends Component {
-  async componentDidMount() {
-    const campaigns = await factory.methods.getDeployedCamapigns().call();
-    console.log(campaigns);
+  static async getInitialProps() {
+    const campaigns = await factory.methods.getDeployedCampaigns().call();
+    return { campaigns };
   }
 
   render() {
-    return <div>This is Index!!!</div>;
+    return <div>{this.props.campaigns[0]}</div>;
   }
 }
 
