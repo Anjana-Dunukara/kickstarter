@@ -1,11 +1,13 @@
 import React from "react";
+import Navbar from "./Navbar";
+import { Container } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 
 export default (props) => {
   return (
-    <div>
-      <h1>This is Header!!!</h1>
+    <Container>
+      <Navbar />
       {props.children}
-      <h1>This is Footer!!!</h1>
-    </div>
+    </Container>
   );
 };
