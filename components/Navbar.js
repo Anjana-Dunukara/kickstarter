@@ -17,7 +17,7 @@ class menu extends Component {
           active={activeItem === "kickstart"}
           onClick={this.handleItemClick}
         >
-          Browse
+          Kickstart
         </Menu.Item>
 
         <Menu.Menu position="right">
