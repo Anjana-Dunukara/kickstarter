@@ -20,7 +20,7 @@ const deploy = async () => {
     from: accounts[0],
   });
 
-  console.log("Attemptinf to deploy from acount ", accounts[0]);
+  console.log("Attempting to deploy from acount ", accounts[0]);
 
   const result = await new web3.eth.Contract(factoryABI)
     .deploy({ data: factoryByteCode })
