@@ -12,6 +12,10 @@ class CampaignIndex extends Component {
   }
 
   renderCampaigns() {
+    if (this.props.campaigns.length === 0) {
+      return <p>No open campaigns found.</p>;
+    }
+
     const items = this.props.campaigns.map((address) => {
       return {
         header: address,
