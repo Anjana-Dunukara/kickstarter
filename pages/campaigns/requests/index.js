@@ -10,6 +10,7 @@ class Requests extends Component {
     const address = props.query.address;
     const campaign = Campaign(address);
     const requestCount = await campaign.methods.getRequestsCount().call();
+    const approversCount = await campaign.methods.approversCount().call();
 
     const requestsArr = await Promise.all(
       Array(requestCount)
@@ -19,7 +20,7 @@ class Requests extends Component {
         })
     );
 
-    return { address, requestsArr, requestCount };
+    return { address, requestsArr, requestCount, approversCount };
   }
 
   renderRows() {
@@ -29,6 +30,7 @@ class Requests extends Component {
           key={index}
           request={request}
           address={this.props.address}
+          approversCount={this.props.approversCount}
         />
       );
     });

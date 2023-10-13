@@ -6,7 +6,7 @@ const factoryABI = CampaignFactory.abi;
 
 const instance = new web3.eth.Contract(
   factoryABI,
-  "0x4e056dc456eb7121fCfd1C6eA13b65F68a3662D5"
+  "0xd839ED49D76A2B731efEAcAFe0a522B6b20E3974"
 );
 
 export default instance;
