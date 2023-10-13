@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Table, Button } from "semantic-ui-react";
 import web3 from "../etherum/web3";
 import Campaign from "../etherum/campaign";
+import { Router } from "../routes";
 
 class RequestRow extends Component {
   onApprove = async () => {
@@ -13,6 +14,7 @@ class RequestRow extends Component {
       await campaign.methods.approveRequest(this.props.id).send({
         from: accounts[0],
       });
+      Router.pushRoute(`/campaigns/${this.props.address}/requests`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
@@ -27,6 +29,7 @@ class RequestRow extends Component {
       await campaign.methods.finalizeRequest(this.props.id).send({
         from: accounts[0],
       });
+      Router.pushRoute(`/campaigns/${this.props.address}/requests`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
