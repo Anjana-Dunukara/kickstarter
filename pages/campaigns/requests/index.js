@@ -42,24 +42,27 @@ class Requests extends Component {
 
     return (
       <Layout>
-        <h3>This is Requests</h3>
+        <h3>Requests</h3>
         <Link route={`/campaigns/${this.props.address}/requests/new`}>
-          <Button primary>Create Request</Button>
-          <Table>
-            <Header>
-              <Row>
-                <HeaderCell>Id</HeaderCell>
-                <HeaderCell>Description</HeaderCell>
-                <HeaderCell>Amount</HeaderCell>
-                <HeaderCell>Recepient</HeaderCell>
-                <HeaderCell>Approval Count</HeaderCell>
-                <HeaderCell>Approve</HeaderCell>
-                <HeaderCell>Finalize</HeaderCell>
-              </Row>
-            </Header>
-            <Body>{this.renderRows()}</Body>
-          </Table>
+          <Button primary floated="right" style={{ marginBottom: 10 }}>
+            Create Request
+          </Button>
         </Link>
+        <Table>
+          <Header>
+            <Row>
+              <HeaderCell>Id</HeaderCell>
+              <HeaderCell>Description</HeaderCell>
+              <HeaderCell>Amount</HeaderCell>
+              <HeaderCell>Recepient</HeaderCell>
+              <HeaderCell>Approval Count</HeaderCell>
+              <HeaderCell>Approve</HeaderCell>
+              <HeaderCell>Finalize</HeaderCell>
+            </Row>
+          </Header>
+          <Body>{this.renderRows()}</Body>
+        </Table>
+        <div>Found {this.props.requestCount} Requests.</div>
       </Layout>
     );
   }
