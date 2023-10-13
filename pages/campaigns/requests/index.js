@@ -28,6 +28,7 @@ class Requests extends Component {
       return (
         <RequestRow
           key={index}
+          id={index}
           request={request}
           address={this.props.address}
           approversCount={this.props.approversCount}
