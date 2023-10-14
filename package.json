@@ -15,7 +15,7 @@
         "ganache-cli": "^6.12.2",
         "mocha": "^10.2.0",
         "next": "^13.5.4",
-        "next-routes": "^1.4.2",
+        "nextjs-routes": "^2.0.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "semantic-ui-css": "^2.5.0",
