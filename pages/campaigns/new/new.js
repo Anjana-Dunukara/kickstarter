@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Layout from "../../components/Layout";
+import Layout from "../../../components/Layout";
 import { Button, Form, Input, Message } from "semantic-ui-react";
-import factory from "../../etherum/factory";
-import web3 from "../../etherum/web3";
-import { Router } from "../../routes";
+import factory from "../../../etherum/factory";
+import web3 from "../../../etherum/web3";
+import { useRouter } from "next/router";
 
 class NewCampaign extends Component {
   state = {
@@ -14,7 +14,7 @@ class NewCampaign extends Component {
 
   onSubmit = async (event) => {
     event.preventDefault();
-
+    const Router = useRouter();
     this.setState({ loading: true, errorMessage: "" });
 
     try {
@@ -26,7 +26,7 @@ class NewCampaign extends Component {
         .send({
           from: accounts[0],
         });
-      Router.pushRoute("/");
+      Router.push("/");
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }

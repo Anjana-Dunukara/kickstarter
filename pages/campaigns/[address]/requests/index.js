@@ -3,11 +3,11 @@ import { Button, Table } from "semantic-ui-react";
 import { Link } from "../../../routes";
 import Layout from "../../../components/Layout";
 import Campaign from "../../../etherum/campaign";
-import RequestRow from "../../../components/RequestRow";
+import RequestRow from "../../../../components/RequestRow";
 
 class Requests extends Component {
   static async getInitialProps(props) {
-    const address = props.query.address;
+    const address = props.params.address;
     const campaign = Campaign(address);
     const requestCount = await campaign.methods.getRequestsCount().call();
     const approversCount = await campaign.methods.approversCount().call();

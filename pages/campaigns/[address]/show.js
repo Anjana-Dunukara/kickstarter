@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import Layout from "../../components/Layout";
-import Campaign from "../../etherum/campaign";
+import Layout from "../../../components/Layout";
+import Campaign from "../../../etherum/campaign";
 import { Button, Card, Grid } from "semantic-ui-react";
-import web3 from "../../etherum/web3";
-import ContributeForm from "../../components/ContributeForm";
-import { Link } from "../../routes";
+import web3 from "../../../etherum/web3";
+import ContributeForm from "../../../components/ContributeForm";
+import Link from "next/link";
 
 class CampaignShow extends Component {
   static async getInitialProps(props) {
-    const campaign = Campaign(props.query.address);
+    const campaign = Campaign(props.params.address);
 
     const summury = await campaign.methods.getSummury().call();
     return {

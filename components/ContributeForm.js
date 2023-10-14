@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Message, Form, Input } from "semantic-ui-react";
 import Campaign from "../etherum/campaign";
 import web3 from "../etherum/web3";
-import { Router } from "../routes";
+import { useRouter } from "../routes";
 
 class CampaignForm extends Component {
   state = {
@@ -13,7 +13,7 @@ class CampaignForm extends Component {
 
   onSubmit = async (event) => {
     event.preventDefault();
-
+    const Router = useRouter();
     this.setState({ loading: true, errorMessage: "" });
 
     try {
@@ -27,7 +27,7 @@ class CampaignForm extends Component {
         value: web3.utils.toWei(this.state.contribution, "ether"),
       });
       this.state.contribution = "";
-      Router.replaceRoute(`/campaigns/${this.props.address}`);
+      Router.push(`/campaigns/${this.props.params.address}`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }

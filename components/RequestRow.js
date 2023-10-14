@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { Table, Button } from "semantic-ui-react";
 import web3 from "../etherum/web3";
 import Campaign from "../etherum/campaign";
-import { Router } from "../routes";
+import { useRouter } from "next/router";
 
 class RequestRow extends Component {
   onApprove = async () => {
-    const campaign = Campaign(this.props.address);
+    const Router = useRouter();
+    const campaign = Campaign(this.props.params.address);
     try {
       window.ethereum.request({ method: "eth_requestAccounts" });
       const accounts = await web3.eth.getAccounts();
@@ -14,14 +15,15 @@ class RequestRow extends Component {
       await campaign.methods.approveRequest(this.props.id).send({
         from: accounts[0],
       });
-      Router.pushRoute(`/campaigns/${this.props.address}/requests`);
+      Router.push(`/campaigns/${this.props.params.address}/requests`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
   };
 
   onFinalize = async () => {
-    const campaign = Campaign(this.props.address);
+    const Router = useRouter();
+    const campaign = Campaign(this.props.params.address);
     try {
       window.ethereum.request({ method: "eth_requestAccounts" });
       const accounts = await web3.eth.getAccounts();
@@ -29,7 +31,7 @@ class RequestRow extends Component {
       await campaign.methods.finalizeRequest(this.props.id).send({
         from: accounts[0],
       });
-      Router.pushRoute(`/campaigns/${this.props.address}/requests`);
+      Router.push(`/campaigns/${this.props.params.address}/requests`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }

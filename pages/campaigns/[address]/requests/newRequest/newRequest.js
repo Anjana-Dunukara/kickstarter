@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import Layout from "../../../components/Layout";
+import Layout from "../../../../../components/Layout";
 import { Button, Message, Form, Input } from "semantic-ui-react";
-import web3 from "../../../etherum/web3";
-import Campaign from "../../../etherum/campaign";
-import { Router } from "../../../routes";
+import web3 from "../../../../../etherum/web3";
+import Campaign from "../../../../../etherum/campaign";
+import { useRouter } from "next/router";
 
 class newRequest extends Component {
   static async getInitialProps(props) {
-    const address = props.query.address;
+    const address = props.params.address;
 
     const campaign = Campaign(props.query.address);
 
@@ -24,7 +24,7 @@ class newRequest extends Component {
 
   onSubmit = async (event) => {
     event.preventDefault();
-
+    const Router = useRouter();
     const { campaign, address } = this.props;
 
     this.setState({ loading: true, errorMessage: "" });
@@ -43,7 +43,7 @@ class newRequest extends Component {
           from: accounts[0],
         });
 
-      Router.pushRoute(`/campaigns/${address}/requests`);
+      Router.push(`/campaigns/${address}/requests`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
